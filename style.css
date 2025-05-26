@@ -104,3 +104,14 @@ img {
     color: #ff3860;
     font-weight: bold;
 }
+
+.back-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.back-link a {
+    color: #fff;
+    text-decoration: underline;
+}
