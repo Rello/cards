@@ -10,47 +10,71 @@
 <div class="container">
     <div class="form-container">
         <form action="process.php" method="post" enctype="multipart/form-data" target="hiddenFrame">
-            Name:<br>
-            <input type="text" name="name" value="Brawler Name" size="15"><br><br>
+            <div class="form-grid">
+                <div class="field">
+                    <label for="name_static">Name</label>
+                    <input type="text" id="name_static" name="name" value="Brawler Name">
+                </div>
 
-            Seltenheitsform:<br>
-            <select name="seltenheitsform">
-                <option value="Gewöhnlich" selected>Gewöhnlich</option>
-                <option value="Ungewöhnlich">Ungewöhnlich</option>
-                <option value="Episch">Episch</option>
-                <option value="Heroisch">Heroisch</option>
-                <option value="Legendär">Legendär</option>
-            </select><br><br>
+                <div class="field">
+                    <label for="selten_static">Seltenheitsform</label>
+                    <select id="selten_static" name="seltenheitsform">
+                        <option value="Gewöhnlich" selected>Gewöhnlich</option>
+                        <option value="Ungewöhnlich">Ungewöhnlich</option>
+                        <option value="Episch">Episch</option>
+                        <option value="Heroisch">Heroisch</option>
+                        <option value="Legendär">Legendär</option>
+                    </select>
+                </div>
 
-            Kosten:<br>
-            <input type="text" name="kosten" value="10" size="5"> Juwelen<br><br>
+                <div class="field">
+                    <label for="kosten_static">Kosten</label>
+                    <input type="text" id="kosten_static" name="kosten" value="10" size="5">
+                </div>
 
-            Reichweite:<br>
-            <select name="reichweite">
-                <option value="1" selected>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select><br><br>
+                <div class="field">
+                    <label for="reichweite_static">Reichweite</label>
+                    <select id="reichweite_static" name="reichweite">
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
 
-            Leben:<br>
-            <input type="text" name="leben" value="100" size="15"><br><br>
+                <div class="field">
+                    <label for="leben_static">Leben</label>
+                    <input type="text" id="leben_static" name="leben" value="100">
+                </div>
 
-            Superangriff:<br>
-            <input type="text" name="superangriff" value="200" size="15"><br><br>
+                <div class="field">
+                    <label for="super_static">Superangriff</label>
+                    <input type="text" id="super_static" name="superangriff" value="200">
+                </div>
 
-            Schaden:<br>
-            <input type="text" name="schaden" value="300" size="15"><br><br>
+                <div class="field">
+                    <label for="schaden_static">Schaden</label>
+                    <input type="text" id="schaden_static" name="schaden" value="300">
+                </div>
 
-            Bild:<br>
-            <input type="file" name="bild" accept="image/*"><br><br>
+                <div class="field full-width">
+                    <label for="bild_static">Bild</label>
+                    <input type="file" id="bild_static" name="bild" accept="image/*">
+                </div>
 
-            Modus:<br>
-            Vorschau: <input type="radio" name="mode" value="0" checked><br>
-            Download: <input type="radio" name="mode" value="1"><br><br>
+                <div class="field full-width">
+                    <label>Modus</label>
+                    <div>
+                        Vorschau: <input type="radio" name="mode" value="0" checked>
+                        Download: <input type="radio" name="mode" value="1">
+                    </div>
+                </div>
 
-            <input type="submit" value="Go">
+                <div class="field full-width">
+                    <input type="submit" value="Go">
+                </div>
+            </div>
         </form>
     </div>
     <div class="image-container">
