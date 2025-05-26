@@ -9,37 +9,24 @@ header('Content-Type: text/html; charset=utf-8');
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Variable, um zu erkennen, ob ein neuer Code verwendet wurde
-$newCodeUsed = false;
+$cookieName = 'session_code';
 
-// Überprüfen, ob ein Code eingegeben wurde
-if (isset($_POST['code'])) {
-	$code = strtoupper(trim($_POST['code']));
-	if (preg_match('/^[A-Z0-9]{6}$/', $code)) {
-		$_SESSION['code'] = $code;
-		$newCodeUsed = true; // Flag setzen, um später das iframe zu aktualisieren
-
-		// Kartenindex zurücksetzen
-		$_SESSION['card_index'] = 0;
-		// Session-Karten zurücksetzen
-		unset($_SESSION['cards']);
-	} else {
-		$error = "Ungültiger Code. Bitte geben Sie einen 6-stelligen alphanumerischen Code ein.";
-	}
-}
-
-// Wenn kein Code in der Session vorhanden ist, generieren wir einen neuen
+// Wenn kein Code in der Session vorhanden ist, versuchen wir ihn aus dem Cookie zu laden
 if (!isset($_SESSION['code'])) {
-	// Generieren eines 6-stelligen alphanumerischen Codes
-	$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-	$code = '';
-	for ($i = 0; $i < 6; $i++) {
-		$code .= $characters[rand(0, strlen($characters) - 1)];
-	}
-	$_SESSION['code'] = $code;
+        if (isset($_COOKIE[$cookieName]) && preg_match('/^[A-Z0-9]{6}$/', $_COOKIE[$cookieName])) {
+                $_SESSION['code'] = $_COOKIE[$cookieName];
+        } else {
+                // Generieren eines 6-stelligen alphanumerischen Codes
+                $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                $generated = '';
+                for ($i = 0; $i < 6; $i++) {
+                        $generated .= $characters[rand(0, strlen($characters) - 1)];
+                }
+                $_SESSION['code'] = $generated;
+                setcookie($cookieName, $generated, time() + 60*60*24*30, '/');
+        }
 }
 
-// Aktueller Code
 $code = $_SESSION['code'];
 
 // Pfad zum Benutzerordner
@@ -74,9 +61,6 @@ if (isset($_SESSION['cards'])) {
 
 // Aktuelle Karte
 $currentCard = isset($cards[$cardIndex]) ? $cards[$cardIndex] : null;
-
-// Fehlermeldungen
-$error = isset($error) ? $error : '';
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -108,14 +92,6 @@ $error = isset($error) ? $error : '';
 <body>
 <h1>Karten-Generator</h1>
 <p>Ihr Session-Code: <strong><?php echo $code; ?></strong></p>
-<form method="post" action="index.php">
-    <label for="code">Vorhandenen Code eingeben:</label>
-    <input type="text" name="code" id="code" maxlength="6" placeholder="6-stelliger Code">
-    <input type="submit" value="Code verwenden">
-</form>
-<?php if ($error): ?>
-    <p class="error"><?php echo htmlspecialchars($error); ?></p>
-<?php endif; ?>
 <div class="container">
     <div class="form-container">
         <h2>Karte <?php echo $cardIndex + 1; ?> von <?php echo count($cards); ?></h2>
@@ -205,12 +181,5 @@ $error = isset($error) ? $error : '';
 
 <!-- Unsichtbares iframe zum Verarbeiten des Formulars -->
 <iframe name="hiddenFrame" style="display:none;"></iframe>
-
-<?php if ($newCodeUsed): ?>
-    <script>
-        // Aktualisiere das iframe mit der generierten Karte
-        refreshIframe();
-    </script>
-<?php endif; ?>
 </body>
 </html>
