@@ -4,9 +4,11 @@
 session_start();
 
 // Prüfen, ob Daten vorhanden sind
-if (!isset($_SESSION['cards'])) {
-	echo "Keine Karte generiert.";
-	exit();
+if (!isset($_SESSION['cards']) || empty($_SESSION['cards'])) {
+        header('Content-Type: text/html; charset=utf-8');
+        echo '<p class="error">Keine Karte generiert. '; 
+        echo '<a href="index.php">Zum Generator</a></p>';
+        exit();
 }
 
 $cards = $_SESSION['cards'];
@@ -26,5 +28,7 @@ if (isset($cards[$cardIndex])) {
 	header('Content-Type: image/png');
 	echo $imageData;
 } else {
-	echo "Karte nicht gefunden.";
+        header('Content-Type: text/html; charset=utf-8');
+        echo '<p class="error">Karte nicht gefunden. ';
+        echo '<a href="index.php">Zurück</a></p>';
 }
