@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Karten-Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Karten-Generator</h1>
+<div class="container">
+    <div class="form-container">
+        <form action="process.php" method="post" enctype="multipart/form-data" target="hiddenFrame">
+            Name:<br>
+            <input type="text" name="name" value="Brawler Name" size="15"><br><br>
+
+            Seltenheitsform:<br>
+            <select name="seltenheitsform">
+                <option value="Gewöhnlich" selected>Gewöhnlich</option>
+                <option value="Ungewöhnlich">Ungewöhnlich</option>
+                <option value="Episch">Episch</option>
+                <option value="Heroisch">Heroisch</option>
+                <option value="Legendär">Legendär</option>
+            </select><br><br>
+
+            Kosten:<br>
+            <input type="text" name="kosten" value="10" size="5"> Juwelen<br><br>
+
+            Reichweite:<br>
+            <select name="reichweite">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select><br><br>
+
+            Leben:<br>
+            <input type="text" name="leben" value="100" size="15"><br><br>
+
+            Superangriff:<br>
+            <input type="text" name="superangriff" value="200" size="15"><br><br>
+
+            Schaden:<br>
+            <input type="text" name="schaden" value="300" size="15"><br><br>
+
+            Bild:<br>
+            <input type="file" name="bild" accept="image/*"><br><br>
+
+            Modus:<br>
+            Vorschau: <input type="radio" name="mode" value="0" checked><br>
+            Download: <input type="radio" name="mode" value="1"><br><br>
+
+            <input type="submit" value="Go">
+        </form>
+    </div>
+    <div class="image-container">
+        <h2>Generierte Karte:</h2>
+        <iframe id="imageFrame" src="display.php" frameborder="0" width="100%" height="500px"></iframe>
+    </div>
+</div>
+
+<!-- Unsichtbares iframe zum Verarbeiten des Formulars -->
+<iframe name="hiddenFrame" style="display:none;"></iframe>
+</body>
+</html>

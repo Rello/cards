@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-container {
+    flex: 1;
+    min-width: 300px;
+    margin-right: 20px;
+}
+
+.image-container {
+    flex: 1;
+    min-width: 300px;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+}
+/* ... Ihr bisheriges CSS ... */
+
+.navigation {
+    margin-top: 20px;
+}
+
+.navigation button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
