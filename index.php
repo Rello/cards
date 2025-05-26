@@ -207,6 +207,7 @@ $currentCard = isset($cards[$cardIndex]) ? $cards[$cardIndex] : null;
         <ul class="card-list">
             <?php foreach ($cards as $i => $card) { ?>
                 <li><button type="button" onclick="updateCardIndex(<?php echo $i; ?>); hideModal();">
+                    <img src="display.php?index=<?php echo $i; ?>&thumb=1" class="card-thumb" alt="Karte <?php echo $i + 1; ?>">
                     <?php echo htmlspecialchars(isset($card['name']) && $card['name'] !== '' ? $card['name'] : 'Karte ' . ($i + 1)); ?>
                 </button></li>
             <?php } ?>

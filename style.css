@@ -161,6 +161,13 @@ img {
     transition: background 0.3s ease;
 }
 
+.card-thumb {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+}
+
 .card-list button:hover {
     background: #4500b5;
 }
