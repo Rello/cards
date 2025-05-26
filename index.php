@@ -119,49 +119,50 @@ $error = isset($error) ? $error : '';
         <h2>Karte <?php echo $cardIndex + 1; ?> von <?php echo count($cards); ?></h2>
         <form action="process.php" method="post" enctype="multipart/form-data" target="hiddenFrame">
             <input type="hidden" name="card_index" value="<?php echo $cardIndex; ?>">
-            <!-- Formularfelder -->
-            Name:<br>
-            <input type="text" name="name" value="<?php echo isset($currentCard['name']) ? htmlspecialchars($currentCard['name']) : ''; ?>" size="15"><br><br>
+            <label for="name">Name:</label>
+            <input id="name" type="text" name="name" value="<?php echo isset($currentCard['name']) ? htmlspecialchars($currentCard['name']) : ''; ?>" size="15">
 
-            Seltenheitsform:<br>
-            <select name="seltenheitsform">
-				<?php
-				$seltenheitsformen = [ ' ','Gewöhnlich', 'Ungewöhnlich', 'Episch', 'Heroisch', 'Legendär'];
-				foreach ($seltenheitsformen as $form) {
-					$selected = (isset($currentCard['seltenheitsform']) && $currentCard['seltenheitsform'] == $form) ? 'selected' : '';
-					echo "<option value=\"$form\" $selected>$form</option>";
-				}
-				?>
-            </select><br><br>
+            <label for="seltenheitsform">Seltenheitsform:</label>
+            <select id="seltenheitsform" name="seltenheitsform">
+                                <?php
+                                $seltenheitsformen = [ ' ','Gew\xF6hnlich', 'Ungew\xF6hnlich', 'Episch', 'Heroisch', 'Legend\xE4r'];
+                                foreach ($seltenheitsformen as $form) {
+                                        $selected = (isset($currentCard['seltenheitsform']) && $currentCard['seltenheitsform'] == $form) ? 'selected' : '';
+                                        echo "<option value=\"$form\" $selected>$form</option>";
+                                }
+                                ?>
+            </select>
 
-            Kosten:<br>
-            <input type="text" name="kosten" value="<?php echo isset($currentCard['kosten']) ? htmlspecialchars($currentCard['kosten']) : ''; ?>" size="5"> Juwelen<br><br>
+            <label for="kosten">Kosten (Juwelen):</label>
+            <input id="kosten" type="text" name="kosten" value="<?php echo isset($currentCard['kosten']) ? htmlspecialchars($currentCard['kosten']) : ''; ?>" size="5">
 
-            Reichweite:<br>
-            <select name="reichweite">
-				<?php
-				for ($i = 1; $i <= 5; $i++) {
-					$selected = (isset($currentCard['reichweite']) && $currentCard['reichweite'] == $i) ? 'selected' : '';
-					echo "<option value=\"$i\" $selected>$i</option>";
-				}
-				?>
-            </select><br><br>
+            <label for="reichweite">Reichweite:</label>
+            <select id="reichweite" name="reichweite">
+                                <?php
+                                for ($i = 1; $i <= 5; $i++) {
+                                        $selected = (isset($currentCard['reichweite']) && $currentCard['reichweite'] == $i) ? 'selected' : '';
+                                        echo "<option value=\"$i\" $selected>$i</option>";
+                                }
+                                ?>
+            </select>
 
-            Leben:<br>
-            <input type="text" name="leben" value="<?php echo isset($currentCard['leben']) ? htmlspecialchars($currentCard['leben']) : ''; ?>" size="15"><br><br>
+            <label for="leben">Leben:</label>
+            <input id="leben" type="text" name="leben" value="<?php echo isset($currentCard['leben']) ? htmlspecialchars($currentCard['leben']) : ''; ?>" size="15">
 
-            Superangriff:<br>
-            <input type="text" name="superangriff" value="<?php echo isset($currentCard['superangriff']) ? htmlspecialchars($currentCard['superangriff']) : ''; ?>" size="15"><br><br>
+            <label for="superangriff">Superangriff:</label>
+            <input id="superangriff" type="text" name="superangriff" value="<?php echo isset($currentCard['superangriff']) ? htmlspecialchars($currentCard['superangriff']) : ''; ?>" size="15">
 
-            Schaden:<br>
-            <input type="text" name="schaden" value="<?php echo isset($currentCard['schaden']) ? htmlspecialchars($currentCard['schaden']) : ''; ?>" size="15"><br><br>
+            <label for="schaden">Schaden:</label>
+            <input id="schaden" type="text" name="schaden" value="<?php echo isset($currentCard['schaden']) ? htmlspecialchars($currentCard['schaden']) : ''; ?>" size="15">
 
-            Bild:<br>
-            <input type="file" name="bild" accept="image/*"><br><br>
+            <label for="bild">Bild:</label>
+            <input id="bild" type="file" name="bild" accept="image/*">
 
-            Modus:<br>
-            Vorschau: <input type="radio" name="mode" value="0" checked><br>
-            Download: <input type="radio" name="mode" value="1"><br><br>
+            <label>Modus:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="mode" value="0" checked> Vorschau</label>
+                <label><input type="radio" name="mode" value="1"> Download</label>
+            </div>
 
             <input type="submit" value="Speichern & Generieren">
         </form>
