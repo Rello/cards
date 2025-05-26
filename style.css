@@ -32,6 +32,28 @@ h1 {
     min-width: 300px;
 }
 
+/* Compact form layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.form-grid .field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+.form-grid input[type="text"],
+.form-grid select {
+    width: 100%;
+    padding: 6px 8px;
+}
+
 input[type="text"], select {
     width: 100%;
     padding: 8px 10px;
