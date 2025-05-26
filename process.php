@@ -64,8 +64,8 @@ $cards[$cardIndex] = [
 	'bild' => $bildName,
 ];
 
-// Kartenliste speichern
-file_put_contents($userDir . '/cards.json', json_encode($cards));
+// Kartenliste speichern (UTF-8 ohne Unicode-Escapes)
+file_put_contents($userDir . '/cards.json', json_encode($cards, JSON_UNESCAPED_UNICODE));
 
 // Speichern der Kartenliste in der Session
 $_SESSION['cards'] = $cards;
