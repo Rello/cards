@@ -30,7 +30,7 @@ if (isset($cards[$index])) {
         if (isset($_GET['thumb'])) {
                 $img = imagecreatefromstring($imageData);
                 if ($img) {
-                        $thumb = imagescale($img, 150);
+                        $thumb = imagescale($img, 80);
                         ob_start();
                         imagepng($thumb);
                         $imageData = ob_get_clean();
