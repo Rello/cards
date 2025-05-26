@@ -178,6 +178,7 @@ $currentCard = isset($cards[$cardIndex]) ? $cards[$cardIndex] : null;
         <iframe id="imageFrame" src="display.php" frameborder="0" width="100%" height="650px"></iframe>
     </div>
 </div>
+<p class="back-link"><a href="welcome.php">Zurück zur Startseite</a></p>
 
 <!-- Unsichtbares iframe zum Verarbeiten des Formulars -->
 <iframe name="hiddenFrame" style="display:none;"></iframe>
