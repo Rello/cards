@@ -87,6 +87,21 @@ $currentCard = isset($cards[$cardIndex]) ? $cards[$cardIndex] : null;
         function refreshIframe() {
             document.getElementById('imageFrame').src = 'display.php?' + new Date().getTime();
         }
+
+        function showAllCards() {
+            document.getElementById('cardModal').style.display = 'block';
+        }
+
+        function hideModal() {
+            document.getElementById('cardModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('cardModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
     </script>
 </head>
 <body>
@@ -171,6 +186,11 @@ $currentCard = isset($cards[$cardIndex]) ? $cards[$cardIndex] : null;
             <button onclick="updateCardIndex(<?php echo max(0, $cardIndex - 1); ?>)" <?php if ($cardIndex == 0) echo 'disabled'; ?>>&laquo; Vorherige Karte</button>
             <button onclick="updateCardIndex(<?php echo min(count($cards) - 1, $cardIndex + 1); ?>)" <?php if ($cardIndex >= count($cards) - 1) echo 'disabled'; ?>>Nächste Karte &raquo;</button>
             <button onclick="updateCardIndex(-1)">Neue Karte</button>
+            <form action="remove_card.php" method="post" style="display:inline;" onsubmit="return confirm('Karte wirklich loeschen?');">
+                <input type="hidden" name="card_index" value="<?php echo $cardIndex; ?>">
+                <button type="submit">Karte loeschen</button>
+            </form>
+            <button onclick="showAllCards()">Alle Karten anzeigen</button>
         </div>
     </div>
     <div class="image-container">
@@ -182,5 +202,24 @@ $currentCard = isset($cards[$cardIndex]) ? $cards[$cardIndex] : null;
 
 <!-- Unsichtbares iframe zum Verarbeiten des Formulars -->
 <iframe name="hiddenFrame" style="display:none;"></iframe>
+
+<div id="cardModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="hideModal()">&times;</span>
+        <h2>Alle Karten</h2>
+        <?php if (count($cards) > 0) { ?>
+        <ul class="card-list">
+            <?php foreach ($cards as $i => $card) { ?>
+                <li><button type="button" onclick="updateCardIndex(<?php echo $i; ?>); hideModal();">
+                    <img src="display.php?index=<?php echo $i; ?>&thumb=1" class="card-thumb" alt="Karte <?php echo $i + 1; ?>">
+                    <?php echo htmlspecialchars(isset($card['name']) && $card['name'] !== '' ? $card['name'] : 'Karte ' . ($i + 1)); ?>
+                </button></li>
+            <?php } ?>
+        </ul>
+        <?php } else { ?>
+        <p>Keine Karten vorhanden.</p>
+        <?php } ?>
+    </div>
+</div>
 </body>
 </html>
