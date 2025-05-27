@@ -186,6 +186,10 @@ $currentCard = isset($cards[$cardIndex]) ? $cards[$cardIndex] : null;
             <button onclick="updateCardIndex(<?php echo max(0, $cardIndex - 1); ?>)" <?php if ($cardIndex == 0) echo 'disabled'; ?>>&laquo; Vorherige Karte</button>
             <button onclick="updateCardIndex(<?php echo min(count($cards) - 1, $cardIndex + 1); ?>)" <?php if ($cardIndex >= count($cards) - 1) echo 'disabled'; ?>>Nächste Karte &raquo;</button>
             <button onclick="updateCardIndex(-1)">Neue Karte</button>
+            <form action="remove_card.php" method="post" style="display:inline;" onsubmit="return confirm('Karte wirklich loeschen?');">
+                <input type="hidden" name="card_index" value="<?php echo $cardIndex; ?>">
+                <button type="submit">Karte loeschen</button>
+            </form>
             <button onclick="showAllCards()">Alle Karten anzeigen</button>
         </div>
     </div>
